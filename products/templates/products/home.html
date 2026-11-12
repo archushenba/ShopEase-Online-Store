@@ -1,0 +1,704 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase | Premium Online Store</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark: #17201e;
+            --green: #557b65;
+            --light-green: #e9f0e9;
+            --cream: #f8f7f2;
+            --text: #252c29;
+            --muted: #78817b;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--dark);
+            padding: 20px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #a8c9ad;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #e4e9e5;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #a8c9ad;
+        }
+
+        .cart-link {
+            background: #a8c9ad;
+            color: #17201e !important;
+            padding: 11px 19px;
+            border-radius: 30px;
+        }
+
+        .hero {
+            margin: 35px 7%;
+            padding: 75px 55px;
+            min-height: 330px;
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 85% 20%, rgba(168,201,173,0.3), transparent 28%),
+                linear-gradient(120deg, #172d25, #557b65);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-tag {
+            color: #c5dfc9;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 5vw, 54px);
+            max-width: 650px;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 510px;
+            color: #e0ebe2;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            width: fit-content;
+            margin-top: 27px;
+            background: #f4f1e8;
+            color: #233c2d;
+            padding: 13px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        .benefits {
+            margin: 0 7%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .benefit {
+            background: white;
+            padding: 19px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            border: 1px solid #eceee8;
+        }
+
+        .benefit-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--light-green);
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            font-size: 20px;
+        }
+
+        .benefit h4 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .benefit p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .section {
+            padding: 65px 7%;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .section-label {
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+        }
+
+        .product-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Search and Filter */
+
+        .filter-box {
+            background: white;
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid #eceee8;
+            margin-bottom: 30px;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: 1fr 220px auto auto;
+            gap: 12px;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dce3dc;
+            border-radius: 9px;
+            outline: none;
+            font-family: inherit;
+            font-size: 13px;
+            background: #fcfdfb;
+            color: var(--text);
+        }
+
+        .filter-form input:focus,
+        .filter-form select:focus {
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(85,123,101,0.12);
+        }
+
+        .filter-btn,
+        .reset-btn {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 9px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background: var(--dark);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background: var(--green);
+        }
+
+        .reset-btn {
+            background: var(--light-green);
+            color: var(--dark);
+        }
+
+        .filter-result {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        /* Product Grid */
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 17px;
+            overflow: hidden;
+            border: 1px solid #eceee8;
+            transition: 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 16px 35px rgba(31, 54, 39, 0.10);
+        }
+
+        .image-box {
+            height: 230px;
+            background: #f1f3ed;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .image-box img {
+            transform: scale(1.06);
+        }
+
+        .image-placeholder {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .product-info {
+            padding: 21px;
+        }
+
+        .category {
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .product-info h3 {
+            font-size: 17px;
+            margin-bottom: 9px;
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        /* Product Details Link */
+
+        .product-detail-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-detail-link:hover h3 {
+            color: var(--green);
+        }
+
+        .description {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+            min-height: 42px;
+            margin-bottom: 14px;
+        }
+
+        .price {
+            color: #355e43;
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stock {
+            color: #43815b;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        .add-btn {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 9px;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background: var(--green);
+        }
+
+        .add-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 35px 7%;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        footer h3 span {
+            color: #a8c9ad;
+        }
+
+        footer p {
+            color: #b9c4bd;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        @media(max-width: 850px) {
+            .filter-form {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media(max-width: 700px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                margin: 22px 5%;
+                padding: 45px 25px;
+            }
+
+            .benefits {
+                margin: 0 5%;
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 45px 5%;
+            }
+
+            .section-heading h2 {
+                font-size: 28px;
+            }
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 14px;
+            }
+
+            .image-box {
+                height: 170px;
+            }
+
+            .product-info {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="{% url 'home' %}" class="logo">
+        ShopEase<span>.</span>
+    </a>
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="#products">Products</a>
+        <a class="cart-link" href="{% url 'cart' %}">🛒 My Cart</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <p class="hero-tag">Welcome to ShopEase</p>
+
+    <h1>Find What You Love. Shop With Ease.</h1>
+
+    <p>
+        Discover everyday essentials and modern products
+        at great prices. Enjoy a simple and comfortable
+        online shopping experience.
+    </p>
+
+    <a href="#products" class="hero-btn">Explore Products →</a>
+</section>
+
+<section class="benefits">
+
+    <div class="benefit">
+        <div class="benefit-icon">🚚</div>
+        <div>
+            <h4>Easy Shopping</h4>
+            <p>A simple shopping experience</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="benefit-icon">⭐</div>
+        <div>
+            <h4>Quality Products</h4>
+            <p>Products for everyday needs</p>
+        </div>
+    </div>
+
+    <div class="benefit">
+        <div class="benefit-icon">🔒</div>
+        <div>
+            <h4>Secure Orders</h4>
+            <p>Easy order management</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="section" id="products">
+
+    <div class="section-heading">
+        <div>
+            <p class="section-label">Our Collection</p>
+            <h2>Explore Products</h2>
+        </div>
+
+        <p class="product-count">
+            {{ products|length }} products found
+        </p>
+    </div>
+
+    <!-- Search and Filter -->
+
+    <div class="filter-box">
+
+        <form method="GET" action="{% url 'home' %}" class="filter-form">
+
+            <input
+                type="search"
+                name="q"
+                placeholder="🔍 Search products..."
+                value="{{ search_query }}"
+            >
+
+            <select name="category">
+                <option value="">All Categories</option>
+
+                {% for category in categories %}
+                    <option
+                        value="{{ category }}"
+                        {% if selected_category == category %}selected{% endif %}
+                    >
+                        {{ category }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="filter-btn">
+                Search
+            </button>
+
+            <a href="{% url 'home' %}#products" class="reset-btn">
+                Reset
+            </a>
+
+        </form>
+
+        {% if search_query or selected_category %}
+            <p class="filter-result">
+                Showing results
+                {% if search_query %}for "{{ search_query }}"{% endif %}
+                {% if selected_category %}in {{ selected_category }}{% endif %}
+            </p>
+        {% endif %}
+
+    </div>
+
+    <!-- Product Cards -->
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+            <div class="product-card">
+
+                <!-- Product Image Click -->
+
+                <a href="{% url 'product_detail' product.id %}" class="product-detail-link">
+
+                    <div class="image-box">
+
+                        {% if product.image %}
+                            <img
+                                src="{{ product.image }}"
+                                alt="{{ product.name }}"
+                                loading="lazy"
+                            >
+                        {% else %}
+                            <div class="image-placeholder">
+                                Image coming soon
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </a>
+
+                <div class="product-info">
+
+                    <p class="category">
+                        {{ product.category }}
+                    </p>
+
+                    <!-- Product Name Click -->
+
+                    <a href="{% url 'product_detail' product.id %}" class="product-detail-link">
+                        <h3>{{ product.name }}</h3>
+                    </a>
+
+                    <p class="description">
+                        {{ product.description|truncatewords:15 }}
+                    </p>
+
+                    <p class="price">
+                        ₹{{ product.price }}
+                    </p>
+
+                    <p class="stock">
+                        {% if product.stock > 0 %}
+                            ✓ In Stock: {{ product.stock }}
+                        {% else %}
+                            Out of Stock
+                        {% endif %}
+                    </p>
+
+                    {% if product.stock > 0 %}
+
+                        <a
+                            class="add-btn"
+                            href="{% url 'add_to_cart' product.id %}"
+                        >
+                            Add to Cart +
+                        </a>
+
+                    {% else %}
+
+                        <button class="add-btn" disabled>
+                            Out of Stock
+                        </button>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="empty-message">
+                <h3>No Products Found</h3>
+                <p>Try another product name or choose a different category.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<footer>
+    <h3>ShopEase<span>.</span></h3>
+    <p>Your everyday shopping destination.</p>
+    <p>© 2026 ShopEase. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

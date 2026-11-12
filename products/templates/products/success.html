@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful | ShopEase</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f5fb;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-card {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            padding: 45px 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            background: #dcfce7;
+            color: #16a34a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 25px;
+        }
+
+        h1 {
+            color: #172554;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .order-details {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .order-details p {
+            margin: 10px 0;
+            color: #334155;
+        }
+
+        .order-details strong {
+            color: #172554;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: #6d28d9;
+            color: white;
+            padding: 13px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-btn:hover {
+            background: #5b21b6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="success-card">
+
+        <div class="success-icon">✓</div>
+
+        <h1>Order Placed Successfully!</h1>
+
+        <p class="message">
+            Thank you for shopping with ShopEase.
+            Your order has been received successfully.
+        </p>
+
+        <div class="order-details">
+
+            <p>
+                <strong>Order ID:</strong>
+                #{{ order.id }}
+            </p>
+
+            <p>
+                <strong>Customer:</strong>
+                {{ order.customer_name }}
+            </p>
+
+            <p>
+                <strong>Total Amount:</strong>
+                ₹{{ order.total_amount }}
+            </p>
+
+            <p>
+                <strong>Order Status:</strong>
+                {{ order.status }}
+            </p>
+
+        </div>
+
+        <a href="{% url 'home' %}" class="home-btn">
+            Continue Shopping
+        </a>
+
+    </div>
+
+</body>
+</html>
